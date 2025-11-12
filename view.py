@@ -6,9 +6,9 @@ import torchvision.transforms as transforms
 
 import pytorch_grad_cam
 from pytorch_grad_cam.utils.image import show_cam_on_image
-from main_model_14 import HiFuse_Small
+from main_model_14 import MedMM_Small
 
-net = HiFuse_Small(num_classes=7)
+net = MedMM_Small(num_classes=7)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 net = net.to(device)
 net.eval()
@@ -42,4 +42,5 @@ grayscale_cam = grayscale_cam[0, :]
 src_img = np.float32(canvas_img) / 255
 visualization_img = show_cam_on_image(src_img, grayscale_cam, use_rgb=False)
 cv2.imshow('feature map', visualization_img)
+
 cv2.waitKey(0)
